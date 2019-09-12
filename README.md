@@ -1,1 +1,1 @@
-# Cantonese Dictionary Chrome Extension
+# Cantonese Pronunciation Chrome Extension

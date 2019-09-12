@@ -1,18 +1,14 @@
-const DATABASE_URL =
-    "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=";
-
-document.addEventListener("mouseup", function() {
+document.addEventListener("mouseup", function(event) {
     let selectedString = window.getSelection().toString();
-    if (selectedString) {
-        fetch(`${DATABASE_URL}${selectedString}`, {
-            method: "GET",
-            mode: "cors"
-        })
-            .then(res => res.text())
-            .then(text => {
-                let parser = new DOMParser();
-                let html = parser.parseFromString(text, "text/html");
-                console.log(html.querySelector('#char_can_table .char_can_head>a').getAttribute('onclick').match(/'([^']+)'/)[1])
-            });
+    let re = /^[\u4E00-\u9FA5]+$/;
+
+    if (selectedString && selectedString.length === 1 && re.test(selectedString)) {
+        console.log(event.clientX, event.clientY);
+        // TODO - Insert button near the string position
+
+        chrome.runtime.sendMessage({
+            type: 'getPronunciation',
+            word: selectedString
+        });
     }
 });
