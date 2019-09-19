@@ -1,9 +1,8 @@
 {
-  "name": "Cantonese Pronunciation",
+  "name": "快查粵音",
   "version": "0.1",
-  "description": "A simple extension that allow you to check the definition and pronunciation of cantonese words",
+  "description": "透過選取網頁上的中文單字以快速搜查其粵語讀音的輔助工具。",
   "permissions": ["*://humanum.arts.cuhk.edu.hk/*", "tabs"],
-  "options_page": "options.html",
   "background": {
       "scripts": ["background.js"]
   },
@@ -11,23 +10,18 @@
       {
           "matches": ["<all_urls>"],
           "all_frames": true,
-          "js": ["contentscript.js"]
+          "js": ["contentscript.js"],
+          "css": ["contentscript.css"]
       }
   ],
+  "web_accessible_resources": ["popover.html"],
   "page_action": {
-      "default_popup": "popup.html",
       "default_icon": {
-          "16": "images/icon16.png",
-          "32": "images/icon32.png",
-          "48": "images/icon48.png",
-          "128": "images/icon128.png"
+          "128": "images/icon.png"
       }
   },
   "icons": {
-      "16": "images/icon16.png",
-      "32": "images/icon32.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
+      "128": "images/icon.png"
   },
   "manifest_version": 2
 }

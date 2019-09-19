@@ -1,0 +1,92 @@
+<div id="cp-popover">
+    <style>
+        #cp-popover {
+            top: 0;
+            left: 0;
+            position: absolute;
+            border: 1px solid #999;
+            border-radius: 5px;
+            z-index: 99999;
+            visibility: hidden;
+        }
+        #cp-popover-close-btn {
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            font-size: 14px;
+            color: #888;
+            cursor: pointer;
+        }
+        #cp-popover-content {
+            padding: 15px 30px 10px 30px;
+            background: #FFEEB9;
+            color: #000;
+            border-radius: 5px;
+        }
+        #cp-popover-content-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .cp-popover-content-pronunciation {
+            font-size: 14px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            -webkit-transition: color .3s;
+            -moz-transition: color .3s;
+            -o-transition: color .3s;
+            transition: color .3s;
+        }
+        .cp-popover-content-pronunciation:last-of-type {
+            margin-bottom: 0px;
+        }
+        .cp-popover-content-pronunciation:hover {
+            color: #cc0001;
+        }
+        #cp-popover-credit {
+            text-align: center;
+            font-size: 10px;
+            margin-top: 15px;
+        }
+        #cp-popover-arrow {
+            position: absolute;
+            left: calc(50% - 10px);
+            bottom: -10px;
+            border-top: 10px solid #FFEEB9;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            z-index: 2;
+        }
+        #cp-popover-arrow-outer {
+            position: absolute;
+            left: calc(50% - 12px);
+            bottom: -12px;
+            border-top: 12px solid #999;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+        }
+        #cp-popover-arrow.upside-down {
+            top: -10px;
+            bottom: unset;
+            border-top: none;
+            border-bottom: 10px solid #FFEEB9;
+        }
+        #cp-popover-arrow-outer.upside-down {
+            top: -10px;
+            bottom: unset;
+            border-top: none;
+            border-bottom: 10px solid #999;
+        }
+    </style>
+    <div id="cp-popover-close-btn">✖</div>
+    <div id="cp-popover-content">
+        <div id="cp-popover-content-title"></div>
+        <div id="cp-popover-content-pronunciation-list"></div>
+        <div id="cp-popover-credit">
+            <a href="">資料來源</a>
+        </div>
+    </div>
+    <div id="cp-popover-arrow"></div>
+    <div id="cp-popover-arrow-outer"></div>
+</div>
