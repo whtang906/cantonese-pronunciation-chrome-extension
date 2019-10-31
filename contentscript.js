@@ -173,7 +173,6 @@ document.addEventListener("mouseup", function(e) {
 });
 
 document.addEventListener("keyup", function(e) {
-    console.log(e.key, triggerMethod)
     if (triggerMethod !== "None" && e.key === triggerMethod) {
         main();
     }
