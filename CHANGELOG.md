@@ -1,6 +1,10 @@
 # Changelog
 Please specify all the changes during the development with the same format.
 
+# 1.1.1
+##### _2019-11-04_
+- Update extension description
+
 # 1.1.0
 ##### _2019-11-04_
 - Refactor code
