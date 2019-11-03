@@ -14,6 +14,85 @@ function playAudio(url) {
     audio.play();
 }
 
+function isBelongsInputEl(el) {
+    const nodes = el.anchorNode.childNodes;
+    let result = false;
+
+    if (nodes.length !== 0) {
+        nodes.forEach(node => {
+            if (node.tagName === "INPUT" || node.tagName === "TEXTAREA") {
+                result = true;
+            }
+        });
+    }
+
+    return result;
+}
+
+function createPopoverPronunciationTitle(title) {
+    let pronunciationTitleEl = document.createElement("p");
+    pronunciationTitleEl.innerHTML = title;
+
+    return pronunciationTitleEl;
+}
+
+function createPopoverPronunciationTable(pronunciations) {
+    let pronunciationTableEl = document.createElement("table");
+    let groupedResult = new Array(pronunciations.length > 3 ? 3 : pronunciations.length); // Rearrange the result to a 3 x N Array
+
+    pronunciations.forEach((pronunciation, index) => {
+        if (!groupedResult[index % 3]) {
+            groupedResult[index % 3] = [];
+        }
+        groupedResult[index % 3].push(pronunciation);
+    });
+
+    groupedResult.forEach(pronunciations => {
+        let pronunciationRowEl = document.createElement("tr");
+        pronunciations.forEach(pronunciation => {
+            let pronunciationEl = document.createElement("td");
+
+            let playBtn = document.createElement("img");
+            playBtn.src = playIconUrl;
+            playBtn.onclick = e => playAudio(pronunciation.audioUrl);
+
+            let textEl = document.createElement("span");
+            textEl.innerHTML = `${pronunciation.pronunciation}`;
+
+            pronunciationEl.className = "cp-popover-content-pronunciation";
+            pronunciationEl.appendChild(textEl);
+            pronunciationEl.appendChild(playBtn);
+
+            pronunciationRowEl.appendChild(pronunciationEl);
+        });
+        pronunciationTableEl.appendChild(pronunciationRowEl);
+    });
+
+    return pronunciationTableEl;
+}
+
+function createPopoverCreditLink(word) {
+    let creditLinkWrapperEl = document.createElement("div");
+    creditLinkWrapperEl.id = "cp-popover-credit";
+
+    let creditLinkEl = document.createElement("a");
+    creditLinkEl.href = `https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=${word}`;
+    creditLinkEl.target = "_blank";
+    creditLinkEl.innerHTML = "查看更多";
+
+    creditLinkWrapperEl.appendChild(creditLinkEl);
+
+    return creditLinkWrapperEl;
+}
+
+function createPopoerPronunciationMessage(message) {
+    let pronunciationMsgEl = document.createElement("div");
+    pronunciationMsgEl.id = "cp-popover-content-pronunciation-message";
+    pronunciationMsgEl.innerHTML = message;
+    
+    return pronunciationMsgEl;
+}
+
 function adjustPopoverPosition(selectedStringPosition, popover) {
     const OFFSET = 12;
     const popoverHeight = popover.offsetHeight;
@@ -32,7 +111,6 @@ function adjustPopoverPosition(selectedStringPosition, popover) {
     }
 
     popover.setAttribute("style", `top: ${y}px; left: ${x}px;`);
-    popover.style.visibility = "visible";
 }
 
 function closePopover() {
@@ -40,21 +118,6 @@ function closePopover() {
     if (popoverEl) {
         popoverEl.remove();
     }
-}
-
-function isBelongsInputEl(el) {
-    const nodes = el.anchorNode.childNodes;
-    let result = false;
-
-    if (nodes.length !== 0) {
-        nodes.forEach(node => {
-            if (node.tagName === "INPUT" || node.tagName === "TEXTAREA") {
-                result = true;
-            }
-        });
-    }
-
-    return result;
 }
 
 function main() {
@@ -73,6 +136,7 @@ function main() {
                     .then(text => {
                         let popoverHost = document.createElement('div');
                         popoverHost.id = "cp-popover-host";
+                        
                         let shardow = popoverHost.createShadowRoot();
 
                         let parser = new DOMParser();
@@ -86,14 +150,14 @@ function main() {
 
                         let title = content.querySelector("#cp-popover-content-title");
                         let pronunciationList = content.querySelector("#cp-popover-content-pronunciation-list");
-                        let creditLink = content.querySelector("#cp-popover-credit>a");
 
                         closeBtn.onclick = e => closePopover();
                         title.innerHTML = selectedString;
-                        creditLink.href = `https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=${selectedString}`;
 
                         shardow.appendChild(popoverWrapper);
                         document.body.appendChild(popoverHost);
+
+                        adjustPopoverPosition(selectedStringPosition, popover);
 
                         chrome.runtime.sendMessage(
                             {
@@ -101,51 +165,17 @@ function main() {
                                 word: selectedString
                             },
                             function(result) {
+                                content.querySelector("#cp-popover-searching-text").remove();
+
                                 if (result.pronunciations.length > 0) {
-                                    let pronunciationTitleEl = document.createElement("p");
-                                    pronunciationTitleEl.innerHTML = "粵音";
+                                    pronunciationList.appendChild(createPopoverPronunciationTitle("粵音"));
+                                    pronunciationList.appendChild(createPopoverPronunciationTable(result.pronunciations));
 
-                                    let pronunciationTableEl = document.createElement("table");
-                                    let groupedResult = new Array(result.pronunciations.length > 3 ? 3 : result.pronunciations.length);
-
-                                    result.pronunciations.forEach((pronunciation, index) => {
-                                        if (!groupedResult[index % 3]) {
-                                            groupedResult[index % 3] = [];
-                                        }
-                                        groupedResult[index % 3].push(pronunciation);
-                                    });
-
-                                    groupedResult.forEach(pronunciations => {
-                                        let pronunciationRowEl = document.createElement("tr");
-                                        pronunciations.forEach(pronunciation => {
-                                            let pronunciationEl = document.createElement("td");
-
-                                            let playBtn = document.createElement("img");
-                                            playBtn.src = playIconUrl;
-                                            playBtn.onclick = e => playAudio(pronunciation.audioUrl);
-
-                                            let textEl = document.createElement("span");
-                                            textEl.innerHTML = `${pronunciation.pronunciation}`;
-
-                                            pronunciationEl.className = "cp-popover-content-pronunciation";
-                                            pronunciationEl.appendChild(textEl);
-                                            pronunciationEl.appendChild(playBtn);
-
-                                            pronunciationRowEl.appendChild(pronunciationEl);
-                                        });
-                                        pronunciationTableEl.appendChild(pronunciationRowEl);
-                                    });
-                                    pronunciationList.appendChild(pronunciationTitleEl);
-                                    pronunciationList.appendChild(pronunciationTableEl);
+                                    content.appendChild(createPopoverCreditLink(selectedString));
                                 } else {
-                                    let pronunciationMsgEl = document.createElement("div");
-                                    pronunciationMsgEl.id = "cp-popover-content-pronunciation-message";
-                                    pronunciationMsgEl.innerHTML = "查無此字";
-
-                                    pronunciationList.appendChild(pronunciationMsgEl);
-
-                                    creditLink.remove();
+                                    pronunciationList.appendChild(createPopoerPronunciationMessage("查無此字"));
                                 }
+                                
                                 adjustPopoverPosition(selectedStringPosition, popover);
                             }
                         );

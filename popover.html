@@ -10,7 +10,7 @@
             border: 1px solid #dbccad;
             border-radius: 5px;
             z-index: 99999;
-            visibility: hidden;
+            /* visibility: hidden; */
             box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
         }
         #cp-popover-close-btn {
@@ -45,6 +45,16 @@
             padding-right: 15px;
             text-align: center;
             border-right: 1px solid #dfd1ac;
+        }
+        #cp-popover-searching-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 0px 5px;
+            color: #584838;
         }
         #cp-popover-content-pronunciation-list {
             display: inline-block;
@@ -143,12 +153,11 @@
     </style>
     <div id="cp-popover">
         <div id="cp-popover-close-btn">✖</div>
-        <div id="cp-popover-content">
+        <div id="cp-popover-content" class="cp-popover-searching">
             <div id="cp-popover-bookmark"></div>
             <div id="cp-popover-content-title"></div>
-            <div id="cp-popover-content-pronunciation-list"></div>
-            <div id="cp-popover-credit">
-                <a href="" target="_blank">查看更多</a>
+            <div id="cp-popover-content-pronunciation-list">
+                <div id="cp-popover-searching-text">搜尋中……</div>
             </div>
         </div>
         <div id="cp-popover-arrow"></div>

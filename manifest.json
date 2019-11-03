@@ -1,6 +1,6 @@
 {
   "name": "粵讀",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "透過選取網頁上的中文單字以快速搜查其粵語讀音的輔助工具。",
   "permissions": ["*://humanum.arts.cuhk.edu.hk/*", "tabs", "storage"],
   "options_page": "options.html",
