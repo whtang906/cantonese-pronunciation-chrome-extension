@@ -4,14 +4,18 @@
             position: absolute;
         }
         #cp-popover {
+            position: relative;
+            width: 100%;
+            border: 1px solid #dbccad;
+        }
+        #cp-popover.popover {
             top: 0;
             left: 0;
             position: absolute;
-            border: 1px solid #dbccad;
             border-radius: 5px;
             z-index: 99999;
-            /* visibility: hidden; */
             box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+            width: fit-content;
         }
         #cp-popover-close-btn {
             position: absolute;
@@ -27,15 +31,17 @@
             left: 30px;
             height: 20px;
             width: 20px;
-            background: url("chrome-extension://__MSG_@@extension_id__/images/bookmark.png")
-                center center no-repeat;
+            background: url("chrome-extension://__MSG_@@extension_id__/images/bookmark.png") center center no-repeat;
             background-size: cover;
         }
         #cp-popover-content {
-            padding: 15px 20px;
+            padding: 10px 20px;
             background: #eee0b9;
             color: #50423f;
             border-radius: 5px;
+        }
+        #cp-popover.popover #cp-popover-content {
+            padding: 15px 20px;
         }
         #cp-popover-content-title {
             display: inline-block;

@@ -29,6 +29,10 @@ function isBelongsInputEl(el) {
     return result;
 }
 
+function getSelectedStringPosition(selectedEl) {
+    return selectedEl.getRangeAt(0).getBoundingClientRect();
+}
+
 function createPopoverPronunciationTitle(title) {
     let pronunciationTitleEl = document.createElement("p");
     pronunciationTitleEl.innerHTML = title;
@@ -85,7 +89,7 @@ function createPopoverCreditLink(word) {
     return creditLinkWrapperEl;
 }
 
-function createPopoerPronunciationMessage(message) {
+function createPopoverPronunciationMessage(message) {
     let pronunciationMsgEl = document.createElement("div");
     pronunciationMsgEl.id = "cp-popover-content-pronunciation-message";
     pronunciationMsgEl.innerHTML = message;
@@ -126,7 +130,6 @@ function main() {
 
     if (!popoverEl) {
         if (selectedEl.rangeCount && !isBelongsInputEl(selectedEl)) {
-            let selectedStringPosition = selectedEl.getRangeAt(0).getBoundingClientRect();
             let selectedString = selectedEl.toString();
             let re = /^[\u4E00-\u9FA5]+$/;
 
@@ -151,13 +154,14 @@ function main() {
                         let title = content.querySelector("#cp-popover-content-title");
                         let pronunciationList = content.querySelector("#cp-popover-content-pronunciation-list");
 
+                        popover.className = "popover";
                         closeBtn.onclick = e => closePopover();
                         title.innerHTML = selectedString;
 
                         shardow.appendChild(popoverWrapper);
                         document.body.appendChild(popoverHost);
 
-                        adjustPopoverPosition(selectedStringPosition, popover);
+                        adjustPopoverPosition(getSelectedStringPosition(selectedEl), popover);
 
                         chrome.runtime.sendMessage(
                             {
@@ -173,10 +177,10 @@ function main() {
 
                                     content.appendChild(createPopoverCreditLink(selectedString));
                                 } else {
-                                    pronunciationList.appendChild(createPopoerPronunciationMessage("查無此字"));
+                                    pronunciationList.appendChild(createPopoverPronunciationMessage("查無此字"));
                                 }
                                 
-                                adjustPopoverPosition(selectedStringPosition, popover);
+                                adjustPopoverPosition(getSelectedStringPosition(selectedEl), popover);
                             }
                         );
                     });

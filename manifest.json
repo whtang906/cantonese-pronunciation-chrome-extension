@@ -1,7 +1,7 @@
 {
   "name": "粵讀",
-  "version": "1.1.1",
-  "description": "快速查聽中文單字的粵語（廣東話）讀音。",
+  "version": "1.2.0",
+  "description": "快速查聽中文字的粵語（廣東話）讀音。",
   "permissions": ["*://humanum.arts.cuhk.edu.hk/*", "tabs", "storage"],
   "options_page": "options.html",
   "background": {
@@ -15,10 +15,9 @@
       }
   ],
   "web_accessible_resources": ["popover.html", "images/*.png"],
-  "page_action": {
-      "default_icon": {
-          "128": "images/icon.png"
-      }
+  "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": "images/icon.png"
   },
   "icons": {
       "128": "images/icon.png"

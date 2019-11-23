@@ -1,6 +1,12 @@
 # Changelog
 Please specify all the changes during the development with the same format.
 
+# 1.2.0
+##### _2019-11-23_
+- Refactor code
+- Add popup page
+- Fix the bug of wrong popover position 
+
 # 1.1.1
 ##### _2019-11-04_
 - Update extension description

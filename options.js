@@ -48,12 +48,14 @@ function resetOptions() {
     chrome.storage.sync.set({ triggerKey: "None" });
 }
 
-$(".radio-btn-gp").click(function() {
-    removeSelectedOptionClass();
-    $(this).addClass("selected");
+$(document).ready(function() {
+    $(".radio-btn-gp").click(function() {
+        removeSelectedOptionClass();
+        $(this).addClass("selected");
+    });
+
+    $("#save-btn").click(saveOptions);
+    $("#reset-btn").click(resetOptions);
+
+    constructOptions(options);
 });
-
-$("#save-btn").click(saveOptions);
-$("#reset-btn").click(resetOptions);
-
-constructOptions(options);

@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     switch (request.type) {
         case "getPronunciations":
             getPronunciations(request.word)
-                .then(result => sendResponse({ pronunciations: result }))
+                .then(result => sendResponse({ word: request.word, pronunciations: result }))
             break;
         default:
     }
