@@ -69,10 +69,9 @@ function createPronunciationMessage(message) {
     return pronunciationMsgEl;
 }
 
-function main() {
+function renderPronunciations(inputString) {
     $(".word").remove();
 
-    const inputString = $("#search-input").val();
     let re = /^[\u4E00-\u9FA5]+$/;
 
     fetch(chrome.extension.getURL("/popover.html"))
@@ -130,11 +129,21 @@ function main() {
 
 $(document).ready(function() {
     $("#search-btn").click(function() {
-        main();
+        renderPronunciations($("#search-input").val());
     });
     $("#search-input").keypress(function(e) {
         if (e.keyCode === 13) {
-            main();
+            renderPronunciations($("#search-input").val());
         }
     });
 });
+
+window.onload = function() {
+    chrome.storage.sync.get(["selectedString"], result => {
+        if (result !== "") {
+            trimmedString = result.selectedString.substring(0, 10);
+            $("#search-input").val(trimmedString);
+            $("#search-btn").click();
+        }
+    });
+};

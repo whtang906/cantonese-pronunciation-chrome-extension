@@ -1,6 +1,11 @@
 # Changelog
 Please specify all the changes during the development with the same format.
 
+# 1.2.1
+##### _2019-12-12_
+- Add popup instant search function
+- Fix css override issue
+
 # 1.2.0
 ##### _2019-11-23_
 - Refactor code

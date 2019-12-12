@@ -93,7 +93,7 @@ function createPopoverPronunciationMessage(message) {
     let pronunciationMsgEl = document.createElement("div");
     pronunciationMsgEl.id = "cp-popover-content-pronunciation-message";
     pronunciationMsgEl.innerHTML = message;
-    
+
     return pronunciationMsgEl;
 }
 
@@ -124,7 +124,7 @@ function closePopover() {
     }
 }
 
-function main() {
+function renderPronunciations() {
     let selectedEl = window.getSelection();
     let popoverEl = document.getElementById("cp-popover-host");
 
@@ -137,9 +137,9 @@ function main() {
                 fetch(chrome.extension.getURL("/popover.html"))
                     .then(res => res.text())
                     .then(text => {
-                        let popoverHost = document.createElement('div');
+                        let popoverHost = document.createElement("div");
                         popoverHost.id = "cp-popover-host";
-                        
+
                         let shardow = popoverHost.createShadowRoot();
 
                         let parser = new DOMParser();
@@ -179,7 +179,7 @@ function main() {
                                 } else {
                                     pronunciationList.appendChild(createPopoverPronunciationMessage("查無此字"));
                                 }
-                                
+
                                 adjustPopoverPosition(getSelectedStringPosition(selectedEl), popover);
                             }
                         );
@@ -192,7 +192,7 @@ function main() {
 window.addEventListener("mousedown", function(e) {
     // Remove existing popover if popover outside is clicked
     let popoverEl = document.getElementById("cp-popover-host");
-    
+
     if (popoverEl) {
         if (!popoverEl.contains(e.target)) {
             popoverEl.remove();
@@ -201,13 +201,20 @@ window.addEventListener("mousedown", function(e) {
 });
 
 document.addEventListener("mouseup", function(e) {
+    let selectedEl = window.getSelection();
+    if (selectedEl.rangeCount) {
+        chrome.storage.sync.set({ selectedString: selectedEl.toString() });
+    } else {
+        chrome.storage.sync.set({ selectedString: "" });
+    }
+
     if (triggerMethod === "None") {
-        main();
+        renderPronunciations();
     }
 });
 
 document.addEventListener("keyup", function(e) {
     if (triggerMethod !== "None" && e.key === triggerMethod) {
-        main();
+        renderPronunciations();
     }
 });
