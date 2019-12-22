@@ -1,6 +1,10 @@
 # Changelog
 Please specify all the changes during the development with the same format.
 
+# 1.2.2
+##### _2019-12-22_
+- Fix the bug of prompting error in console
+
 # 1.2.1
 ##### _2019-12-12_
 - Add popup instant search function

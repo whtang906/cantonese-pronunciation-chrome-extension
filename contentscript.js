@@ -6,7 +6,9 @@ chrome.storage.sync.get(["triggerKey"], result => {
 });
 
 chrome.storage.onChanged.addListener((changes, namepsace) => {
-    triggerMethod = changes.triggerKey.newValue;
+    if (changes.triggerKey) {
+        triggerMethod = changes.triggerKey.newValue;
+    }
 });
 
 function playAudio(url) {
