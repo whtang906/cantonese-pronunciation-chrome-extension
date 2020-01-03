@@ -5,3 +5,5 @@
 !.vscode/extensions.json
 
 *.zip
+
+.DS_Store

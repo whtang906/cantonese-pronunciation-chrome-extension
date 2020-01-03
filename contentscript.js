@@ -204,7 +204,7 @@ window.addEventListener("mousedown", function(e) {
 
 document.addEventListener("mouseup", function(e) {
     let selectedEl = window.getSelection();
-    if (selectedEl.rangeCount) {
+    if (selectedEl.rangeCount && !selectedEl.isCollapsed) {
         chrome.storage.sync.set({ selectedString: selectedEl.toString() });
     } else {
         chrome.storage.sync.set({ selectedString: "" });
