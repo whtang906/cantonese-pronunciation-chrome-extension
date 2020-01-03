@@ -1,6 +1,6 @@
 {
   "name": "粵讀",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "快速查聽中文字的粵語（廣東話）讀音。",
   "permissions": ["*://humanum.arts.cuhk.edu.hk/*", "tabs", "storage"],
   "options_page": "options.html",

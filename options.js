@@ -7,11 +7,9 @@ function removeSelectedOptionClass() {
 
 function constructOptions(options) {
     let selectEl = document.createElement("select");
-    selectEl.id = "keyup-options";
-    selectEl.defaultValue = options[0];
 
     chrome.storage.sync.get(["triggerKey"], result => {
-        if (result.triggerKey !== "None") {
+        if (result.triggerKey && result.triggerKey !== "None") {
             $(".radio-btn-gp[data-value='keyup']").addClass("selected");
             selectEl.value = result.triggerKey;
         } else {
@@ -28,6 +26,9 @@ function constructOptions(options) {
         selectEl.appendChild(optionEl);
     }
 
+    selectEl.id = "keyup-options";
+    selectEl.defaultValue = options[0];
+    
     page.appendChild(selectEl);
 }
 

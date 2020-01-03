@@ -128,6 +128,8 @@ function renderPronunciations(inputString) {
 }
 
 $(document).ready(function() {
+    $("#option-page").attr("href", chrome.extension.getURL('/options.html'));
+    
     $("#search-btn").click(function() {
         renderPronunciations($("#search-input").val());
     });
