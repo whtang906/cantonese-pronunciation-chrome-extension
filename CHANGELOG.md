@@ -4,7 +4,9 @@ Please specify all the changes during the development with the same format.
 # 1.2.3
 ##### _2020-01-03_
 - Add option hyperlink in popup page
+- Update style
 - Fix the display bug of option page
+- Fix some console issues
 
 # 1.2.2
 ##### _2019-12-22_
