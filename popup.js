@@ -82,7 +82,7 @@ function renderPronunciations(inputString) {
                     let popoverHost = document.createElement("div");
                     popoverHost.className = "word";
 
-                    let shardow = popoverHost.createShadowRoot();
+                    let shadow = popoverHost.attachShadow({mode: 'open'});
 
                     let parser = new DOMParser();
                     let doc = parser.parseFromString(text, "text/html");
@@ -95,7 +95,7 @@ function renderPronunciations(inputString) {
                     let title = content.querySelector("#cp-popover-content-title");
                     let pronunciationList = content.querySelector("#cp-popover-content-pronunciation-list");
 
-                    shardow.appendChild(popoverWrapper);
+                    shadow.appendChild(popoverWrapper);
 
                     title.innerHTML = word;
                     popover.querySelector("#cp-popover-close-btn").remove();

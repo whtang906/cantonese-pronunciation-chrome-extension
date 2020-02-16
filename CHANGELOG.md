@@ -1,6 +1,11 @@
 # Changelog
 Please specify all the changes during the development with the same format.
 
+# 1.2.4
+##### _2020-02-17_
+- Fix the deprecated issue of createShadowRoot function
+- Fix some typos in the code
+
 # 1.2.3
 ##### _2020-01-03_
 - Add option hyperlink in popup page

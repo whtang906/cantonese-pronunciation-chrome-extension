@@ -142,7 +142,7 @@ function renderPronunciations() {
                         let popoverHost = document.createElement("div");
                         popoverHost.id = "cp-popover-host";
 
-                        let shardow = popoverHost.createShadowRoot();
+                        let shadow = popoverHost.attachShadow({mode: 'open'});
 
                         let parser = new DOMParser();
                         let doc = parser.parseFromString(text, "text/html");
@@ -160,7 +160,7 @@ function renderPronunciations() {
                         closeBtn.onclick = e => closePopover();
                         title.innerHTML = selectedString;
 
-                        shardow.appendChild(popoverWrapper);
+                        shadow.appendChild(popoverWrapper);
                         document.body.appendChild(popoverHost);
 
                         adjustPopoverPosition(getSelectedStringPosition(selectedEl), popover);
