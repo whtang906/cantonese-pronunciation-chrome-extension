@@ -1,6 +1,11 @@
 # Changelog
 Please specify all the changes during the development with the same format.
 
+# 1.3.0
+##### _2024-11-05_
+- Migrate to Manifest V3
+- Revamp the project using React, Typescript and Webpack
+
 # 1.2.4
 ##### _2020-02-17_
 - Fix the deprecated issue of createShadowRoot function

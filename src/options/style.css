@@ -1,0 +1,84 @@
+#content {
+    padding: 30px 25px;
+    background: #eee0b9;
+    color: #50423f;
+    width: 640px;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+}
+.logo-wrapper {
+    text-align: center;
+}
+#logo {
+    width: 60px;
+}
+h1 {
+    text-align: center;
+    margin-top: 5px;
+}
+.options-gp {
+    margin-bottom: 30px;
+}
+.option-row {
+    display: table-row;
+}
+.option-name,
+.option-value-list {
+    display: table-cell;
+}
+.option-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+.radio-btn-gp {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.radio-btn-gp:hover .radio-btn {
+    border-color: #bbb;
+}
+.radio-btn-gp.selected > .radio-btn::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    background: #666;
+}
+.radio-btn {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #999;
+    border-radius: 50%;
+}
+.radio-btn-label {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.radio-btn-additional-info {
+    margin-left: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.btn-gp {
+    text-align: center;
+    margin-top: 15px;
+}
+.btn {
+    padding: 5px 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 5px;
+    background: #eee;
+}
+#save-btn {
+    background: #d62027;
+    color: #fff;
+}

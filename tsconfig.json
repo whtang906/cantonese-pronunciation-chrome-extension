@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ES6",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "lib": ["dom", "webworker"],
+  },
+  "include": ["src/**/*"]
+}

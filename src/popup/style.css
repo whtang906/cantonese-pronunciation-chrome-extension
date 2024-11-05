@@ -1,0 +1,53 @@
+
+body {
+    background: #eee0b9;
+    width: 350px;
+}
+#content {
+    background: #eee0b9;
+    padding: 5px 15px 5px 15px;
+}
+input {
+    padding: 5px 5px;
+    outline: none;
+    height: 16px;
+}
+.btn {
+    display: inline-block;
+    padding: 7px 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin: 0px 5px;
+    background: #d62027;
+    color: #fff;
+}
+.btn:hover {
+    background: #e2151d;
+}
+.btn:active {
+    background: #c72329;
+}
+#search-section {
+    margin-bottom: 15px;
+}
+#option {
+    text-align: right;
+    color: #584838;
+}
+#credit {
+    margin-top: 15px;
+    text-align: right;
+    font-size: 10px;
+    color: #584838;
+}
+#option > a,
+#credit > a {
+    color: #d62027;
+    text-decoration: none;
+    font-weight: bold;
+}
+#option > a:hover,
+#credit > a:hover {
+    text-decoration: underline;
+}
